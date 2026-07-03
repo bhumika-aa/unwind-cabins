@@ -13,9 +13,9 @@ export const About = () => {
   ];
 
   const team = [
-    { name: 'Emily Watson', role: 'Founder & CEO', avatar: 'https://i.pravatar.cc/150?img=47' },
-    { name: 'James Carter', role: 'Head of Operations', avatar: 'https://i.pravatar.cc/150?img=53' },
-    { name: 'Sofia Patel', role: 'Customer Experience', avatar: 'https://i.pravatar.cc/150?img=46' },
+    { name: 'Emily Watson', role: 'Founder & CEO', avatar: '/default-avatar.png' },
+    { name: 'James Carter', role: 'Head of Operations', avatar: '/default-avatar.png' },
+    { name: 'Sofia Patel', role: 'Customer Experience', avatar: '/default-avatar.png' },
   ];
 
   const gallery = [

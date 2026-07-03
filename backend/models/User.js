@@ -29,7 +29,7 @@ const userSchema = new mongoose.Schema({
     default: 'user'
   },
   avatar: {
-    url: { type: String, default: 'https://i.pravatar.cc/150' },
+    url: { type: String, default: '/default-avatar.png' },
     public_id: { type: String }
   },
   wishlist: [{

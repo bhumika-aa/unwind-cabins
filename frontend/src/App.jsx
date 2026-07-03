@@ -18,6 +18,7 @@ import { AdminBookings } from './pages/Admin/Bookings';
 import { AdminReviews } from './pages/Admin/Reviews';
 import { AdminMessages } from './pages/Admin/Messages';
 import { AdminNewsletter } from './pages/Admin/Newsletter';
+import { AdminSettings } from './pages/Admin/Settings';
 import { ProtectedRoute, AdminRoute } from './components/ProtectedRoute';
 
 function App() {
@@ -36,7 +37,7 @@ function App() {
           <Route path="reviews" element={<AdminReviews />} />
           <Route path="messages" element={<AdminMessages />} />
           <Route path="newsletter" element={<AdminNewsletter />} />
-          <Route path="settings" element={<AdminPlaceholder title="Settings" />} />
+          <Route path="settings" element={<AdminSettings />} />
         </Route>
       </Route>
 

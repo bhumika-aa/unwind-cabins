@@ -10,7 +10,7 @@ import toast from 'react-hot-toast';
 const CabinDetails = () => {
   const { id } = useParams();
   const navigate = useNavigate();
-  const { isAuthenticated, user } = useAuth();
+  const { isAuthenticated, user, toggleWishlist } = useAuth();
 
   const [cabin, setCabin] = useState(null);
   const [reviews, setReviews] = useState([]);
@@ -140,6 +140,19 @@ const CabinDetails = () => {
 
   const today = new Date().toISOString().split('T')[0];
 
+  const isSaved = user?.wishlist?.some(item => 
+    (typeof item === 'object' ? item._id : item) === id
+  );
+
+  const handleSaveToggle = async () => {
+    if (!isAuthenticated) {
+      toast.error('Please log in to save cabins');
+      navigate('/login');
+      return;
+    }
+    await toggleWishlist(id);
+  };
+
   return (
     <div className="bg-[#f4f7f6] min-h-screen py-10 px-6 md:px-12 lg:px-24">
       <div className="max-w-7xl mx-auto bg-white p-6 md:p-8 rounded-2xl shadow-sm border border-gray-100">
@@ -160,8 +173,11 @@ const CabinDetails = () => {
             <button className="flex items-center gap-2 px-4 py-2 rounded-md hover:bg-gray-100 transition-colors border border-gray-200">
               <FiShare2 /> Share
             </button>
-            <button className="flex items-center gap-2 px-4 py-2 rounded-md hover:bg-gray-100 transition-colors border border-gray-200">
-              <FiHeart /> Save
+            <button 
+              onClick={handleSaveToggle}
+              className={`flex items-center gap-2 px-4 py-2 rounded-md hover:bg-gray-100 transition-colors border ${isSaved ? 'border-red-200 text-red-500 bg-red-50' : 'border-gray-200'}`}
+            >
+              <FiHeart className={isSaved ? 'fill-current' : ''} /> {isSaved ? 'Saved ❤️' : 'Save ♡'}
             </button>
           </div>
         </div>
@@ -249,7 +265,7 @@ const CabinDetails = () => {
                   {reviews.map(review => (
                     <div key={review._id} className="flex gap-4">
                       <img
-                        src={review.user?.avatar?.url || `https://i.pravatar.cc/150?u=${review.user?._id}`}
+                        src={review.user?.avatar?.url || `/default-avatar.png`}
                         alt=""
                         className="w-10 h-10 rounded-full object-cover shrink-0"
                       />

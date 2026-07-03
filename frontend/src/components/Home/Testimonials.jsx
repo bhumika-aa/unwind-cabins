@@ -7,7 +7,7 @@ const mockTestimonials = [
     quote: "Absolutely breathtaking! The cabin was spotless, the views were incredible, and the peace and quiet was exactly what we needed. We will definitely be coming back next year.",
     name: "Sarah Jenkins",
     location: "London, UK",
-    avatar: "https://i.pravatar.cc/150?img=47"
+    avatar: "/default-avatar.png"
   },
   {
     id: 2,
@@ -15,7 +15,7 @@ const mockTestimonials = [
     quote: "A perfect getaway. The attention to detail in the cabin design is outstanding. Waking up to the sound of birds and having coffee on the porch was the highlight of our trip.",
     name: "Michael Chen",
     location: "Manchester, UK",
-    avatar: "https://i.pravatar.cc/150?img=11"
+    avatar: "/default-avatar.png"
   },
   {
     id: 3,
@@ -23,7 +23,7 @@ const mockTestimonials = [
     quote: "Very relaxing stay. The hot tub was a fantastic addition, especially after a long day of hiking in the surrounding trails. Highly recommend for couples looking to unwind.",
     name: "Emily Davies",
     location: "Bristol, UK",
-    avatar: "https://i.pravatar.cc/150?img=5"
+    avatar: "/default-avatar.png"
   }
 ];
 

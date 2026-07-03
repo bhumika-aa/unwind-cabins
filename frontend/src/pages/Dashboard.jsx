@@ -26,7 +26,7 @@ export const DashboardLayout = () => {
         <div className="w-full md:w-64 bg-white rounded-xl shadow-sm border border-gray-100 p-6 self-start">
           <div className="flex flex-col items-center mb-8 pb-8 border-b border-gray-100">
             <img 
-              src={user?.avatar?.url || "https://i.pravatar.cc/150"} 
+              src={user?.avatar?.url || "/default-avatar.png"} 
               alt="Profile" 
               className="w-24 h-24 rounded-full object-cover mb-4 border" 
             />
@@ -183,7 +183,7 @@ export const Profile = () => {
         
         <div className="flex flex-col sm:flex-row items-center gap-6 mb-6">
           <img 
-            src={avatar?.url || "https://i.pravatar.cc/150"} 
+            src={avatar?.url || "/default-avatar.png"} 
             alt="Preview" 
             className="w-20 h-20 rounded-full object-cover border" 
           />

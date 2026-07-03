@@ -22,27 +22,33 @@ const Cabins = () => {
   const [totalCount, setTotalCount] = useState(0);
   const [isFilterOpen, setIsFilterOpen] = useState(false);
 
-  // Filter state
-  const [search, setSearch] = useState(searchParams.get('search') || '');
-  const [priceMin, setPriceMin] = useState(searchParams.get('priceMin') || '');
-  const [priceMax, setPriceMax] = useState(searchParams.get('priceMax') || '');
-  const [guests, setGuests] = useState(searchParams.get('maxGuests[gte]') || '');
-  const [bedrooms, setBedrooms] = useState(searchParams.get('bedrooms[gte]') || '');
+  // Local form state (for inputs while typing/selecting)
+  const [localFilters, setLocalFilters] = useState({
+    search: searchParams.get('search') || '',
+    priceMin: searchParams.get('priceMin') || '',
+    priceMax: searchParams.get('priceMax') || '',
+    guests: searchParams.get('maxGuests[gte]') || '',
+    bedrooms: searchParams.get('bedrooms[gte]') || ''
+  });
+
+  // Applied filters (triggers API)
+  const [appliedFilters, setAppliedFilters] = useState(localFilters);
+
   const [sortBy, setSortBy] = useState(searchParams.get('sort') || '-createdAt');
   const [page, setPage] = useState(Number(searchParams.get('page') || 1));
 
   const buildQuery = useCallback(() => {
     const params = new URLSearchParams();
-    if (search) params.set('search', search);
-    if (priceMin) params.set('price[gte]', priceMin);
-    if (priceMax) params.set('price[lte]', priceMax);
-    if (guests) params.set('maxGuests[gte]', guests);
-    if (bedrooms) params.set('bedrooms[gte]', bedrooms);
+    if (appliedFilters.search) params.set('search', appliedFilters.search);
+    if (appliedFilters.priceMin) params.set('price[gte]', appliedFilters.priceMin);
+    if (appliedFilters.priceMax) params.set('price[lte]', appliedFilters.priceMax);
+    if (appliedFilters.guests) params.set('maxGuests[gte]', appliedFilters.guests);
+    if (appliedFilters.bedrooms) params.set('bedrooms[gte]', appliedFilters.bedrooms);
     params.set('sort', sortBy);
     params.set('page', page);
     params.set('limit', PAGE_SIZE);
     return `?${params.toString()}`;
-  }, [search, priceMin, priceMax, guests, bedrooms, sortBy, page]);
+  }, [appliedFilters, sortBy, page]);
 
   const fetchCabins = useCallback(async () => {
     setLoading(true);
@@ -66,14 +72,16 @@ const Cabins = () => {
 
   const handleApplyFilters = (e) => {
     e.preventDefault();
+    setAppliedFilters(localFilters);
     setPage(1);
-    fetchCabins();
     setIsFilterOpen(false);
   };
 
   const handleReset = () => {
-    setSearch(''); setPriceMin(''); setPriceMax('');
-    setGuests(''); setBedrooms(''); setSortBy('-createdAt');
+    const resetState = { search: '', priceMin: '', priceMax: '', guests: '', bedrooms: '' };
+    setLocalFilters(resetState);
+    setAppliedFilters(resetState);
+    setSortBy('-createdAt');
     setPage(1);
   };
 
@@ -94,8 +102,8 @@ const Cabins = () => {
           <input
             type="text"
             placeholder="Cabin name..."
-            value={search}
-            onChange={e => setSearch(e.target.value)}
+            value={localFilters.search}
+            onChange={e => setLocalFilters({ ...localFilters, search: e.target.value })}
             className="w-full pl-9 pr-3 py-2 border border-gray-300 rounded-md text-sm outline-none focus:ring-2 focus:ring-[#375344]"
           />
         </div>
@@ -109,16 +117,16 @@ const Cabins = () => {
             type="number"
             placeholder="Min"
             min={0}
-            value={priceMin}
-            onChange={e => setPriceMin(e.target.value)}
+            value={localFilters.priceMin}
+            onChange={e => setLocalFilters({ ...localFilters, priceMin: e.target.value })}
             className="w-1/2 px-3 py-2 border border-gray-300 rounded-md text-sm outline-none focus:ring-2 focus:ring-[#375344]"
           />
           <input
             type="number"
             placeholder="Max"
             min={0}
-            value={priceMax}
-            onChange={e => setPriceMax(e.target.value)}
+            value={localFilters.priceMax}
+            onChange={e => setLocalFilters({ ...localFilters, priceMax: e.target.value })}
             className="w-1/2 px-3 py-2 border border-gray-300 rounded-md text-sm outline-none focus:ring-2 focus:ring-[#375344]"
           />
         </div>
@@ -128,8 +136,8 @@ const Cabins = () => {
       <div>
         <label className="block text-sm font-medium text-gray-700 mb-1">Minimum Guests</label>
         <select
-          value={guests}
-          onChange={e => setGuests(e.target.value)}
+          value={localFilters.guests}
+          onChange={e => setLocalFilters({ ...localFilters, guests: e.target.value })}
           className="w-full px-3 py-2 border border-gray-300 rounded-md text-sm outline-none focus:ring-2 focus:ring-[#375344]"
         >
           <option value="">Any</option>
@@ -143,8 +151,8 @@ const Cabins = () => {
       <div>
         <label className="block text-sm font-medium text-gray-700 mb-1">Minimum Bedrooms</label>
         <select
-          value={bedrooms}
-          onChange={e => setBedrooms(e.target.value)}
+          value={localFilters.bedrooms}
+          onChange={e => setLocalFilters({ ...localFilters, bedrooms: e.target.value })}
           className="w-full px-3 py-2 border border-gray-300 rounded-md text-sm outline-none focus:ring-2 focus:ring-[#375344]"
         >
           <option value="">Any</option>
@@ -156,7 +164,8 @@ const Cabins = () => {
 
       <button
         onClick={handleApplyFilters}
-        className="w-full bg-[#375344] text-white py-3 rounded-md font-medium hover:bg-[#2c4236] transition-colors flex items-center justify-center gap-2"
+        disabled={loading}
+        className="w-full bg-[#375344] text-white py-3 rounded-md font-medium hover:bg-[#2c4236] transition-colors flex items-center justify-center gap-2 disabled:opacity-70"
       >
         <FiFilter size={16} /> Apply Filters
       </button>

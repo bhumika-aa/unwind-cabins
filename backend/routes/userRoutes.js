@@ -1,10 +1,15 @@
 const express = require('express');
-const { getUsers, getUser, createUser, updateUser, deleteUser } = require('../controllers/userController');
+const { getUsers, getUser, createUser, updateUser, deleteUser, addToWishlist, removeFromWishlist } = require('../controllers/userController');
 const { protect, authorize } = require('../middlewares/auth');
 
 const router = express.Router();
 
 router.use(protect);
+
+router.route('/wishlist/:cabinId')
+  .post(addToWishlist)
+  .delete(removeFromWishlist);
+
 router.use(authorize('admin'));
 
 router.route('/')

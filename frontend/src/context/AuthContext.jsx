@@ -1,5 +1,6 @@
 import { createContext, useState, useEffect, useContext } from 'react';
 import authService from '../services/authService';
+import userService from '../services/userService';
 import toast from 'react-hot-toast';
 
 const AuthContext = createContext();
@@ -85,8 +86,36 @@ export const AuthProvider = ({ children }) => {
     }
   };
 
+  const toggleWishlist = async (cabinId) => {
+    if (!user) return false;
+    
+    const isInWishlist = user.wishlist?.some(item => 
+      (typeof item === 'object' ? item._id : item) === cabinId
+    );
+
+    try {
+      let res;
+      if (isInWishlist) {
+        res = await userService.removeFromWishlist(cabinId);
+        toast.success('Removed from wishlist');
+      } else {
+        res = await userService.addToWishlist(cabinId);
+        toast.success('Added to wishlist');
+      }
+      
+      setUser(prev => ({
+        ...prev,
+        wishlist: res.data 
+      }));
+      return true;
+    } catch (err) {
+      toast.error('Failed to update wishlist');
+      return false;
+    }
+  };
+
   return (
-    <AuthContext.Provider value={{ user, isAuthenticated, loading, login, register, logout, updateProfile }}>
+    <AuthContext.Provider value={{ user, isAuthenticated, loading, login, register, logout, updateProfile, toggleWishlist }}>
       {children}
     </AuthContext.Provider>
   );

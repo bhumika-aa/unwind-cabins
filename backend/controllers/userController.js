@@ -62,3 +62,27 @@ exports.deleteUser = asyncHandler(async (req, res, next) => {
   await user.deleteOne();
   res.status(200).json({ success: true, data: {} });
 });
+
+// @desc    Add cabin to wishlist
+// @route   POST /api/users/wishlist/:cabinId
+// @access  Private
+exports.addToWishlist = asyncHandler(async (req, res, next) => {
+  const user = await User.findById(req.user.id);
+  if (!user.wishlist.includes(req.params.cabinId)) {
+    user.wishlist.push(req.params.cabinId);
+    await user.save();
+  }
+  res.status(200).json({ success: true, data: user.wishlist });
+});
+
+// @desc    Remove cabin from wishlist
+// @route   DELETE /api/users/wishlist/:cabinId
+// @access  Private
+exports.removeFromWishlist = asyncHandler(async (req, res, next) => {
+  const user = await User.findById(req.user.id);
+  user.wishlist = user.wishlist.filter(
+    (id) => id.toString() !== req.params.cabinId
+  );
+  await user.save();
+  res.status(200).json({ success: true, data: user.wishlist });
+});

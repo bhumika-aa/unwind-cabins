@@ -33,7 +33,7 @@ const Hero = () => {
         >
           <div className="flex -space-x-3">
             {[1,2,3,4,5].map((i) => (
-              <img key={i} src={`https://i.pravatar.cc/100?img=${i}`} alt="user" className="w-10 h-10 rounded-full border-2 border-white object-cover" />
+              <img key={i} src={`/default-avatar.png`} alt="user" className="w-10 h-10 rounded-full border-2 border-white object-cover" />
             ))}
           </div>
           <div className="flex items-center gap-2">

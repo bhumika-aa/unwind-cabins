@@ -20,6 +20,14 @@ const userService = {
   deleteUser: async (id) => {
     const response = await api.delete(`/users/${id}`);
     return response.data;
+  },
+  addToWishlist: async (cabinId) => {
+    const response = await api.post(`/users/wishlist/${cabinId}`);
+    return response.data;
+  },
+  removeFromWishlist: async (cabinId) => {
+    const response = await api.delete(`/users/wishlist/${cabinId}`);
+    return response.data;
   }
 };
 
