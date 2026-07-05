@@ -16,6 +16,11 @@ const mockImage = {
   public_id: 'mock_image_id'
 };
 
+const userImage = {
+  url: '/default-avatar.png',
+  public_id: 'default_avatar_id'
+};
+
 const cabins = Array.from({ length: 30 }).map((_, i) => ({
   title: `Cabin Retreat ${i + 1}`,
   location: 'Hampshire · England',
@@ -38,7 +43,7 @@ const users = [
     email: 'admin@unwindcabins.com',
     password: 'password123',
     role: 'admin',
-    avatar: mockImage
+    avatar: userImage
   }
 ];
 
@@ -50,7 +55,7 @@ for (let i = 1; i < 10; i++) {
     email: `user${i}@example.com`,
     password: 'password123',
     role: 'user',
-    avatar: mockImage
+    avatar: userImage
   });
 }
 

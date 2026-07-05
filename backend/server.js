@@ -14,6 +14,7 @@ dotenv.config();
 connectDB();
 
 const app = express();
+app.set('query parser', 'extended');
 
 // Security Middlewares
 app.use(helmet());

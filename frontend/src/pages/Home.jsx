@@ -5,7 +5,9 @@ import Inspiration from '../components/Home/Inspiration';
 import Testimonials from '../components/Home/Testimonials';
 import VideoSection from '../components/Home/VideoSection';
 import FAQ from '../components/Home/FAQ';
-import Newsletter from '../components/Home/Newsletter';
+import WonderfulExperience from '../components/Home/WonderfulExperience';
+import Nourish from '../components/Home/Nourish';
+import EscapeZoom from '../components/Home/EscapeZoom';
 
 const Home = () => {
   return (
@@ -15,9 +17,11 @@ const Home = () => {
       <FeaturedCabins />
       <Inspiration />
       <Testimonials />
+      <WonderfulExperience />
       <VideoSection />
+      <Nourish />
       <FAQ />
-      <Newsletter />
+      <EscapeZoom />
     </div>
   );
 };

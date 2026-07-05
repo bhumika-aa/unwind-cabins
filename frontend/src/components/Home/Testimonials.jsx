@@ -7,7 +7,7 @@ const mockTestimonials = [
     quote: "Absolutely breathtaking! The cabin was spotless, the views were incredible, and the peace and quiet was exactly what we needed. We will definitely be coming back next year.",
     name: "Sarah Jenkins",
     location: "London, UK",
-    avatar: "/default-avatar.png"
+    avatar: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=100&h=100&q=80"
   },
   {
     id: 2,
@@ -15,7 +15,7 @@ const mockTestimonials = [
     quote: "A perfect getaway. The attention to detail in the cabin design is outstanding. Waking up to the sound of birds and having coffee on the porch was the highlight of our trip.",
     name: "Michael Chen",
     location: "Manchester, UK",
-    avatar: "/default-avatar.png"
+    avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=100&h=100&q=80"
   },
   {
     id: 3,
@@ -23,7 +23,7 @@ const mockTestimonials = [
     quote: "Very relaxing stay. The hot tub was a fantastic addition, especially after a long day of hiking in the surrounding trails. Highly recommend for couples looking to unwind.",
     name: "Emily Davies",
     location: "Bristol, UK",
-    avatar: "/default-avatar.png"
+    avatar: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?auto=format&fit=crop&w=100&h=100&q=80"
   }
 ];
 

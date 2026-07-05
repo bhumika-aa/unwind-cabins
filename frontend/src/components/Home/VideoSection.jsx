@@ -1,24 +1,70 @@
-import { FiPlay } from 'react-icons/fi';
+import { useState, useRef } from 'react';
+import { FiChevronRight, FiPlay } from 'react-icons/fi';
+import { Link } from 'react-router-dom';
 
 const VideoSection = () => {
+  const [isPlaying, setIsPlaying] = useState(false);
+  const videoRef = useRef(null);
+
+  const handlePlayClick = () => {
+    if (videoRef.current) {
+      videoRef.current.play();
+      setIsPlaying(true);
+    }
+  };
   return (
-    <section className="py-24 px-6 md:px-12 lg:px-24 bg-[#f4f7f6]">
-      <div className="max-w-6xl mx-auto rounded-2xl overflow-hidden relative shadow-2xl h-[500px]">
-        <img 
-          src="https://images.unsplash.com/photo-1478131143081-80f7f84ca84d?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&q=80" 
-          alt="Cabin video thumbnail" 
-          className="w-full h-full object-cover"
-        />
-        <div className="absolute inset-0 bg-black/30 flex items-center justify-center">
-          <button className="w-20 h-20 bg-white/20 backdrop-blur-md rounded-full flex items-center justify-center text-white hover:bg-white/30 transition-colors group">
-            <div className="w-16 h-16 bg-white rounded-full flex items-center justify-center text-[#375344] group-hover:scale-110 transition-transform">
-              <FiPlay size={24} className="ml-1" />
-            </div>
-          </button>
+    <section className="py-24 px-6 md:px-12 lg:px-24 bg-white relative overflow-hidden">
+      <div className="max-w-7xl mx-auto flex flex-col lg:flex-row items-center gap-16">
+        {/* Left Content */}
+        <div className="flex-1 max-w-xl">
+          <h2 className="text-4xl font-serif font-bold text-[#1f2937]">Get ready to unwind</h2>
+          <div className="w-16 h-[2px] bg-[#e5a452] my-6"></div>
+          
+          <p className="text-gray-600 mb-6 leading-relaxed">
+            A cabin getaway can be a wonderful way to relax and reconnect with nature. Many cabin rentals are located in beautiful, secluded areas, surrounded by trees and other natural beauty.
+          </p>
+          
+          <p className="text-gray-600 mb-8 leading-relaxed">
+            A cabin getaway can be a wonderful way to escape the hustle and bustle of daily life and reconnect with nature.
+          </p>
+          
+          <Link to="/about" className="font-medium text-gray-700 hover:text-gray-900 flex items-center gap-2 group">
+            Learn more <FiChevronRight className="group-hover:translate-x-1 transition-transform" />
+          </Link>
         </div>
-        <div className="absolute bottom-10 left-10 text-white">
-          <h3 className="text-3xl font-serif font-bold mb-2">Experience the serenity</h3>
-          <p className="text-lg text-gray-200">Take a virtual tour of our flagship cabin</p>
+
+        {/* Right Video Thumbnail */}
+        <div className="flex-1 relative w-full">
+          {/* Dotted Pattern Background */}
+          <div className="absolute -top-8 -right-8 w-48 h-48 grid grid-cols-6 gap-3 z-0 opacity-20">
+            {[...Array(36)].map((_, i) => (
+              <div key={i} className="w-2 h-2 rounded-full bg-gray-400"></div>
+            ))}
+          </div>
+          
+          <div className="relative z-10 rounded-xl overflow-hidden shadow-2xl h-[400px] w-full bg-gray-900">
+            <video 
+              ref={videoRef}
+              src="/Video-front.mp4" 
+              className="w-full h-full object-cover"
+              controls={isPlaying}
+              onPlay={() => setIsPlaying(true)}
+              onPause={() => setIsPlaying(false)}
+              onEnded={() => setIsPlaying(false)}
+            />
+            {!isPlaying && (
+              <div 
+                className="absolute inset-0 bg-black/20 flex items-center justify-center cursor-pointer group"
+                onClick={handlePlayClick}
+              >
+                <button className="w-20 h-20 bg-white/30 backdrop-blur-sm rounded-full flex items-center justify-center text-white group-hover:bg-white/40 transition-colors border border-white/20 shadow-lg">
+                  <div className="w-16 h-16 bg-transparent flex items-center justify-center text-white/90 group-hover:scale-110 transition-transform">
+                    <FiPlay size={32} className="ml-2 fill-current" />
+                  </div>
+                </button>
+              </div>
+            )}
+          </div>
         </div>
       </div>
     </section>

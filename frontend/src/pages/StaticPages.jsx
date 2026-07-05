@@ -13,9 +13,9 @@ export const About = () => {
   ];
 
   const team = [
-    { name: 'Emily Watson', role: 'Founder & CEO', avatar: '/default-avatar.png' },
-    { name: 'James Carter', role: 'Head of Operations', avatar: '/default-avatar.png' },
-    { name: 'Sofia Patel', role: 'Customer Experience', avatar: '/default-avatar.png' },
+    { name: 'Emily Watson', role: 'Founder & CEO', avatar: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=200&h=200&q=80' },
+    { name: 'James Carter', role: 'Head of Operations', avatar: 'https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=200&h=200&q=80' },
+    { name: 'Sofia Patel', role: 'Customer Experience', avatar: 'https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=200&h=200&q=80' },
   ];
 
   const gallery = [

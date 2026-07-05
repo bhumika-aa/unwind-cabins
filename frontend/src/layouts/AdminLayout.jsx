@@ -1,5 +1,5 @@
 import { NavLink, Outlet, useNavigate } from 'react-router-dom';
-import { FiHome, FiUsers, FiBox, FiCalendar, FiMessageSquare, FiLogOut, FiSettings, FiGrid, FiFeather, FiStar, FiMail } from 'react-icons/fi';
+import { FiHome, FiUsers, FiBox, FiCalendar, FiLogOut, FiGrid, FiFeather, FiStar } from 'react-icons/fi';
 import { useAuth } from '../context/AuthContext';
 
 const AdminLayout = () => {
@@ -19,21 +19,18 @@ const AdminLayout = () => {
     { name: 'Experiences', path: '/admin/experiences', icon: FiGrid },
     { name: 'Blogs', path: '/admin/blogs', icon: FiFeather },
     { name: 'Reviews', path: '/admin/reviews', icon: FiStar },
-    { name: 'Messages', path: '/admin/messages', icon: FiMessageSquare },
-    { name: 'Newsletter', path: '/admin/newsletter', icon: FiMail },
-    { name: 'Settings', path: '/admin/settings', icon: FiSettings },
   ];
 
   return (
-    <div className="h-screen bg-gray-100 flex overflow-hidden">
+    <div className="min-h-screen bg-gray-100 flex">
       {/* Sidebar */}
-      <aside className="w-64 bg-[#1f2937] text-white flex-col hidden md:flex h-full flex-shrink-0 z-10">
+      <aside className="w-64 bg-[#1f2937] text-white flex-col hidden md:flex fixed h-screen z-10">
         <div className="p-6">
           <span className="text-2xl font-bold text-[#e5a452]">UNWIND</span>
           <span className="text-2xl font-bold text-white">ADMIN</span>
         </div>
         
-        <nav className="flex-1 px-4 space-y-2 py-4 overflow-y-auto">
+        <nav className="flex-1 px-4 space-y-2 py-4">
           {navItems.map(item => (
             <NavLink
               key={item.name}
@@ -54,15 +51,15 @@ const AdminLayout = () => {
       </aside>
 
       {/* Main Content */}
-      <main className="flex-1 flex flex-col h-full overflow-hidden">
-        <header className="bg-white h-16 flex-shrink-0 shadow-sm flex items-center justify-between px-8 z-0">
+      <main className="flex-1 md:ml-64 flex flex-col min-h-screen">
+        <header className="bg-white h-16 sticky top-0 shadow-sm flex items-center justify-between px-8 z-0">
           <h2 className="text-xl font-bold text-gray-800">Admin Portal</h2>
           <div className="flex items-center gap-4">
             <img src={user?.avatar?.url || '/default-avatar.png'} alt="Admin" className="w-8 h-8 rounded-full object-cover" />
             <span className="font-medium text-gray-700">{user ? `${user.firstName} ${user.lastName}` : 'Admin'}</span>
           </div>
         </header>
-        <div className="p-8 flex-1 overflow-y-auto">
+        <div className="p-8 flex-1">
           <Outlet />
         </div>
       </main>

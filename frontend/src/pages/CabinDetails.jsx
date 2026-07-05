@@ -177,7 +177,7 @@ const CabinDetails = () => {
               onClick={handleSaveToggle}
               className={`flex items-center gap-2 px-4 py-2 rounded-md hover:bg-gray-100 transition-colors border ${isSaved ? 'border-red-200 text-red-500 bg-red-50' : 'border-gray-200'}`}
             >
-              <FiHeart className={isSaved ? 'fill-current' : ''} /> {isSaved ? 'Saved ❤️' : 'Save ♡'}
+              <FiHeart className={isSaved ? 'fill-current' : ''} /> {isSaved ? 'Saved' : 'Save'}
             </button>
           </div>
         </div>
