@@ -2,8 +2,8 @@ import axios from 'axios';
 import toast from 'react-hot-toast';
 
 const api = axios.create({
-  baseURL: '/api', // Using Vite proxy or full URL in production
-  withCredentials: true, // Important for cookies
+  baseURL: import.meta.env.VITE_API_URL || 'http://localhost:5000/api',
+  withCredentials: true,
 });
 
 // Response interceptor for global error handling
