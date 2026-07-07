@@ -36,10 +36,15 @@ app.use(cookieParser());
 //app.use(mongoSanitize());
 
 // Enable CORS
-app.use(cors({
-  origin: process.env.NODE_ENV === 'production' ? 'your_production_frontend_url' : 'http://localhost:5173',
-  credentials: true
-}));
+app.use(
+  cors({
+    origin: [
+      "http://localhost:5173",
+      "https://unwind-cabins-mocha.vercel.app",
+    ],
+    credentials: true,
+  })
+);
 
 // Route files
 const auth = require('./routes/authRoutes');
